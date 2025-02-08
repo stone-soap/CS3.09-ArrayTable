@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="iu">
+	<head>
+		<meta charset="UTF-8">
+		<title>Make a table</title>
+		<meta name="description" content="Make a table assignment">
+		<meta name="author" content="-kris-">
+		<!--
+			Change log:
+				5. December 2018	- created, forking from MakeATable			- Drapak
+				3. December 2024 	- created copy from og code 				- kris :P
+				9. December 2024    - considered giving up :P (joke dw)			- krizzy
+				11.December 2024 	- almost done :D 							- krissss
+				12.December 2024  	- skibidi jquery, animation is working :D	- krih
+				12.December 2024 	- append the child to the damn graph 		- kris
+				13.December 2024 	- finished, consider the child appended 	- kris :3
+
+		-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+		</script>
+
+		<style>
+
+			
+			#outputButton {
+				position: absolute;
+				top: 	  20.3%;
+				font-family: Courier New, Monospace;
+				font-weight: 	bold;
+				background-color: #92DCDD;
+				border:         2px solid #013861;
+			}
+
+			img{
+				height: 60px;
+				width: 	50px;
+			}
+		
+			table, th, td {
+			  border: 1px solid;
+			  border-color: #62B6C1;
+			}
+
+			th{
+				font-family: Courier New, Monospace;
+				font-weight: bold;
+			}
+
+			th{
+				background-color: #75B6B8; 
+			}
+
+			td{
+				background-color: #AADDD6;
+			}
+
+			#outputId {
+				opacity: 0;
+			}
+
+			#memeButton {
+				position: absolute;
+				top: 	  20.3%;
+				left: 	  13.3%;
+				font-family: Courier New, Monospace;
+				font-weight: 	bold;
+				background-color: #92DCDD;
+				border:         2px solid #013861;				
+			}
+
+
+		</style>
+	</head>
+
+
+	<!--
+		See http://drapak.ca/cpg/MakeATableWithArraysOfObjects.shtml for hints
+		
+		Check your code using the Markerator before handing it in!
+		http://citadelcreates.drapak.ca/cpg/markerator.html
+	
+		Evaluation:
+		
+			INIT:  include ALL of:
+				[-] link to jQuery in the head of your document
+				[-] create an array of objects
+				[-] add a new object to the array inside the square brackets: []
+				[-] separate your array of objects into it's own function that
+					 returns the completed array
+				Independent challenge:
+		!!		[-] push an object onto the end of your array (.push)
+				
+			HTML-CSS: include ALL of:
+				inside the CSS <style> block, include:
+				[-] create a different font style or weight for the headings and cells
+				[-] create a different background for the headings and cells
+				[-] add a border to at least one part of the table
+				
+				table components:
+				[-] create a table with headings <th> inside <thead>
+				[-] create a table with data cells <td> inside <tbody>
+				
+			PROCESS: include ALL of:
+				[-] create a function that accepts an array of objects as arguments/parameters
+				[-] create a separate function to //PROCESS the table code
+	??			[-] use string addition or createElement to create the HTML for the table
+				[-] use for loops to create a table row for each object in the array
+				
+			OUTPUT: include ALL FIVE of:
+				[-] create a separate function to //OUTPUT the working table code
+				[-] make that function accept the table code as a parameter/argument
+				[-] use innerHTML or appendChild to display the working table using Javascript
+				
+				Independent challenges:
+	??			[-] output images in your table using your array of objects
+				[-] animate a graph using your array of objects
+				
+			STYLE: include ALL of:
+				[-] honour all previous //STYLE sections
+				[-] break up functions into separate ones for input, processing, and output
+				[-] use descriptive comments to identify and describe each function, 
+					 and each loop:
+					//loop through each element of the loop to create the rows
+
+https://farcry.fandom.com/wiki/Guns_for_Hire#Far_Cry_5
+https://www.polygon.com/far-cry-5-guide/2018/3/30/17182214/specialists-for-hire-best
+https://www.ign.com/wikis/far-cry-5/Guns_For_Hire
+https://gamefaqs.gamespot.com/pc/210070-far-cry-5/faqs/78394/specialists
+
+https://www.codeproject.com/Tips/886197/A-JavaScript-Functional-Programming-Example
+	GOOD EXAMPLE FOR FUNCTIONAL PIPELINE. 
+
+------------STYLE GUIDE FOR LONG LINES: DO NOT PASS COLUMN 95 -------------------------------|
+	-->
+	
+	<body>
+		<h1>3.09: Hand-in: Make a Table with an Array of Objects.</h1>
+		
+		<h2 id="heading">
+			FAR CRY 5??? SPECIALIST GUIDE??
+			You'll never have to refer to the wiki again!! <br>
+			Unless you need quest details..
+		</h2>
+
+		<button id="outputButton">RRRRREVEAL THE LIST!</button>
+
+		<div id="outputId"></div>
+
+		<button id="memeButton">cheeburg</button>
+
+
+ 		<script>
+ 		//INIT - DEFINE OBJECTS, FC5 GUN FOR HIRES :P
+			var initSpecialArray = function(){
+				console.log('initialisation of the array');
+
+				var mainSpecialistsArray = [
+					{
+						name: 				"Nick Rye",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/9/90/NickArtWork.png/revision/latest?cb=20180501204959",
+						region:				"Holland Valley",
+						class:				"Pilot", 
+						title:				"The King of the Skies",
+						species: 			"Human",
+						weapons:			"Plane, AR-C",
+						recruitedAt:		"Rye & Sons Aviation",
+						associatedQuest: 	"Wingman",
+						abilities1:			"Bomb's Away: Drops bombs from the plane.",
+						abilities2: 		"Light 'Em Up: Strafes from the air.",
+					},
+
+					{
+						name: 				"Grace Armstrong",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/6/6c/GraceArtWork.png/revision/latest?cb=20180501210147",
+						region:				"Holland Valley",
+						class:				"Sniper", 
+						title:				"The Sharp-Shooting Hero",
+						species: 			"Human",
+						weapons:			"AR-CL Sniper Rifle",
+						recruitedAt:		"Lamb of God Church",
+						associatedQuest: 	"Grace Under Fire",
+						abilities1:			"Boom Boom: Her sniper shots scare enemies.",
+						abilities2: 		"Friendly Sight: Her laser sight is easy to distinguish.",
+
+					},
+
+					{
+						name: 				"Boomer",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/8/82/BoomerArtWork.png/revision/latest?cb=20180501205837",
+						region:				"Holland Valley",
+						class:				"Scout", 
+						title:				"The Good Boy",
+						species: 			"Australian Cattle dog",
+						weapons:			"N/A",
+						recruitedAt:		"Rae-Rae's Pumpkin Farm",
+						associatedQuest: 	"Man's Best Friend",
+						abilities1:			"Pointer: Tags all nearby enemies.",
+						abilities2: 		"Retriever: Will sometimes fetch weapons after an attack.",
+					},				
+
+					{
+						name: 				"Jess Black",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/7/7b/JassArtWork.png/revision/latest?cb=20180501205540",
+						region:				"Whitetail Mountains",
+						class:				"Hunter", 
+						title:				"The Master Huntress",
+						species: 			"Human",
+						weapons:			"Compound Bow",
+						recruitedAt:		"Baron Lumber Mill",
+						associatedQuest: 	"A Dish Served Cold",
+						abilities1:			"Concealment: Enemies have a hard time spotting her.",
+						abilities2: 		"Feral Friendly: Wild animals won't attack her in the woods.",
+					},
+
+					{
+						name: 				"Hurk Drubman Jr",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/0/00/HurkArtWork.png/revision/latest?cb=20180501210223",
+						region:				"Whitetail Mountains",
+						class:				"RPG", 
+						title:				"Just Dangerously Stupid",
+						species: 			"Human",
+						weapons:			"Rocket Launcer",
+						recruitedAt:		"Fort Drubman",
+						associatedQuest: 	"The Prodigal Son",
+						abilities1:			"Heat Seeker: RPGs will track and hit vehicles.",
+						abilities2: 		"Junk it: RPGs are more destructive to vehicles.",
+					},
+
+					{
+						name: 				"Cheeseburger",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/3/3a/CheeseburgerArtWork.png/revision/latest?cb=20180501205917",
+						region:				"Whitetail Mountains",
+						class:				"Heavy", 
+						title:				"The Fearsome Grizzly",
+						species: 			"Grizzly Bear",
+						weapons:			"N/A",
+						recruitedAt:		"F.A.N.G. Center",
+						associatedQuest: 	"A Right to Bear Arms",
+						abilities1:			"Bear Arms: Exercises his right to attack.",
+						abilities2: 		"Cross to Bear: Draws focus during combat.",
+					},
+
+					{
+						name: 				"Adelaide Drubman",		
+						img: src = "https://static.wikia.nocookie.net/farcry/images/9/94/AddieArtWork.png/revision/latest?cb=20180501205643",
+						region:				"Henbane River",
+						class:				"Pilot", 
+						title:				"The Chopper Queen",
+						species: 			"Human",
+						weapons:			"Helicopter, AR-C",
+						recruitedAt:		"The Drubman Marina",
+						associatedQuest: 	"Friendly Skies",
+						abilities1:			"Call a Chopper: Will fly in her Helicopter.",
+						abilities2: 		"Less Reload: Bigger magazine = more shooting.",
+					},
+
+					{
+						name: 				"Sharky Boshaw",	
+						img: src = "https://static.wikia.nocookie.net/farcry/images/1/1b/SharkyArtWork.png/revision/latest?cb=20180501205750",			
+						region:				"Henbane River",
+						class:				"Heavy Flamer", 
+						title:				"The Pyrotechnics Phenom",
+						species: 			"Human",
+						weapons:			"Flamethrower",
+						recruitedAt:		"Moonflower Trailer Park",
+						associatedQuest: 	"Burn, Baby, Burn!",
+						abilities1:			"Fire it up: Attacks will catch on enemies.",
+						abilities2: 		"Shatterproof: Resistance to most explosions.",
+					},
+
+
+				];
+
+				mainSpecialistsArray.push( 
+					{
+					    name: 				"Peaches",
+						img: src = "https://static.wikia.nocookie.net/farcry/images/5/55/PeachesArtWork.png/revision/latest?cb=20180501210011",
+						region:				"Henbane River",
+						class:				"Stealth", 
+						title:				"The Feline Powerhouse",
+						species: 			"Mountain Lion",
+						weapons:			"N/A",
+						recruitedAt:		"Peaches Taxidermy",
+						associatedQuest: 	"Here Kitty, Kitty",
+						abilities1:			"Pounce: Silently takes down enemies.",
+						abilities2: 		"Stalk: Stays hidden when moving through tall grass.", 
+					} 
+				);
+				return mainSpecialistsArray;
+			}
+
+				
+
+
+
+
+		//PROCESS - processing function, for making the table
+			var createTableCode = function(mainSpecialistsArray){
+				console.log("in createTableCode.mainSpecialistsArray = ", mainSpecialistsArray);
+				var tableCode = 
+
+					"<table>"
+						+ "<thead>"
+							+ "<tr>"
+								+ "<th>Name</th>"
+								+ "<th>Portrait</th>"
+								+ "<th>Region</th>"
+								+ "<th>Class</th>"
+								+ "<th>Title</th>"
+								+ "<th>Species</th>"
+								+ "<th>Weapons</th>"
+								+ "<th>Recruited At</th>"
+								+ "<th>Associated Quest</th>"
+								+ "<th>Abilities (1)</th>"
+								+ "<th>Abilities (2)</th>"
+							+ "</tr>"
+						+ "</thead>"
+				return tableCode;
+			}
+
+			//PROCESS - FOR LOOPS, looping the Table
+			
+			var continueTableCode = function(mainSpecialistsArray){
+				var tableCodeTwo = "";
+				for (i in mainSpecialistsArray){
+					tableCodeTwo
+						= tableCodeTwo
+							+ "<tr>" //OPEN NEW ROW
+							+ "<td>" + mainSpecialistsArray[ i ].name + "</td>"
+							+ "<td>" + "<img src='" + mainSpecialistsArray[ i ].img + "'>" + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].region + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].class + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].title + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].species + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].weapons + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].recruitedAt + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].associatedQuest + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].abilities1 + "</td>"
+							+ "<td>" + mainSpecialistsArray[ i ].abilities2 + "</td>"
+						+ "</tr>"; //CLOSE THE ROW
+				
+				}	
+				return tableCodeTwo;
+			}
+
+			var finishTableCode = function(){
+				var tableCodeFinal =
+					+ "</tbody>"
+					+ "</table>";
+				console.log('finished table code');		
+				return tableCodeFinal;
+			}	
+		
+
+// https://drapak.ca/cpg/outputAddingElements.shtml use this to set up and append chil
+
+	
+
+		//INPUT - the button :P - make the table display when the button was clicked.
+			document.querySelector( '#outputButton' ).onclick = function() {   
+			    console.log("in the input function...");
+			    
+			    var mainSpecialistsArray = initSpecialArray();
+			    var tableCode = createTableCode( mainSpecialistsArray ); //send tablecode forward
+			    var tableCodeTwo = continueTableCode(mainSpecialistsArray );
+			    var tableCodeFinal = finishTableCode( );
+			    var tableCodeOutput = tableCode + tableCodeTwo + tableCodeFinal;
+			    displayTable(tableCodeOutput);
+
+			}
+
+		//MAIN PROCEDURE - ANIMATION
+			var mainProcedure = function(){
+				console.log('in main procedure');
+
+				runAnimation(tableCodeFinal);
+			}
+
+
+
+		//OUTPUT - displaying the table. 
+			var displayTable = function(tableCodeFinal){					
+				$( '#outputId' ).animate( {opacity: 1}, {duration: 1000} );
+				console.log('run animation');
+				console.log("in displaytable.tableCodeFinal" + tableCodeFinal);
+				document.querySelector('#outputId').innerHTML = tableCodeFinal;	
+	//			document.querySelector('outputId').appendChild(tableCodeFinal);							
+			}
+			
+			var createNewImage = function(){ //make a new image
+				console.log('add new image');
+				//make the image empty
+				var newImageElement = document.createElement("img");
+				//give the new image a source
+				newImageElement.src = "https://media1.tenor.com/m/pig1UI7B-XMAAAAd/farcry5-cheeseburger.gif";
+				//give the new image an id and style
+				newImageElement.id 				= 'cheeseburgId';
+				newImageElement.style.position  = "relative";
+				newImageElement.style.height    = "173px";
+				newImageElement.style.width     = "298px";
+	
+				//join the image to the output
+				document.querySelector( '#outputId' ).appendChild( newImageElement );
+			}
+
+				document.querySelector('#memeButton').onclick = createNewImage;
+
+
+			/*
+------------STYLE GUIDE FOR LONG LINES: DO NOT PASS COLUMN 95 -------------------------------|
+			*/
+		</script>
+	</body>
+</html>
